@@ -20,10 +20,10 @@ def RepItem(ruck):
 def PriNum(letter):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     priority = 1
-    if letter.isupper():
+    if letter.isupper():                # Problems with caps sorted
         priority += 26
     for item in alphabet:
-        if item == letter.lower():
+        if item == letter.lower():      # No need for caps
             return priority
         else:
             priority += 1
@@ -35,11 +35,9 @@ with open ("input.txt", "r") as input:
     pack_3_ruck = []
     for line in input:
         pack_3_ruck.append(line.strip())
-        if len(pack_3_ruck) == 3:
-            print(pack_3_ruck)
+        if len(pack_3_ruck) == 3:         #Process 3-by-3 lines
             letter = RepItem(pack_3_ruck)
-            print (letter)
             pri = PriNum(letter)
             pri_sum += pri
-            print(pri_sum)
             pack_3_ruck.clear()
+    print(pri_sum)

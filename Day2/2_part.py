@@ -8,7 +8,7 @@ Y - Draw = 3 Points
 X - Lose = 0 Points
 """
 
-"""     PSEUDO CODE
+"""
 Store 1st letter in var 1
 Store 2nd letter in var 2
 Decide winner (or draw)
@@ -30,7 +30,7 @@ def Numberify(hand):
 
 def WinLoseDraw(player_hand, opponent_hand):
     if player_hand == opponent_hand:
-        return 3       # It's a draw, get 3 points
+        return 3                                # It's a draw, get 3 points
     elif player_hand == 1 and opponent_hand == 3:
         return 6
     elif opponent_hand == player_hand - 1:
@@ -39,16 +39,16 @@ def WinLoseDraw(player_hand, opponent_hand):
         return 0
 
 def ChooseMyHand(opponent_hand, condition):
-    if condition == 'Y':     # I need to draw
+    if condition == 'Y':                        # I need to draw
         return opponent_hand
-    elif condition == 'X':     # I need to lose
+    elif condition == 'X':                      # I need to lose
         if opponent_hand == 'A':
             return 'Z'
         elif opponent_hand == 'B':
             return 'X'
         else:
             return 'Y'
-    else:                       # I need to win 
+    else:                                       # I need to win
         if opponent_hand == 'A':
             return 'Y'
         elif opponent_hand == 'B':
@@ -60,17 +60,14 @@ with open('input.txt', 'r') as input:
     lines = input.readlines()
     score = 0
     for line in lines:
-        print(line[0], line[2])
         op_hand = line[0]
         cond = line[2]
         p1_hand = ChooseMyHand(op_hand, cond)
-        print("p1_hand: " , p1_hand)
+        # Continue as in Part 1 from here on
         p1 = Numberify(p1_hand)
-        print("p1: " , p1)
         op = Numberify(op_hand)
         p1 += WinLoseDraw(p1, op)
         score += p1
-        print("score post: " , score)
         p1 = 0
 
 print(score)

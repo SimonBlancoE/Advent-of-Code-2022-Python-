@@ -8,7 +8,7 @@ Draw = 3 Points
 Lose = 0 Points
 """
 
-"""     PSEUDO CODE
+"""
 Store 1st letter in var 1
 Store 2nd letter in var 2
 Decide winner (or draw)
@@ -19,7 +19,7 @@ Calculate points
 """
 
 
-def Numberify(hand):
+def Numberify(hand):                                #Give default points for hand
     if hand == 'A' or hand == 'X':
         return 1
     elif hand == 'B' or hand == 'Y':
@@ -28,10 +28,10 @@ def Numberify(hand):
         return 3
 
 
-def WinLoseDraw(player_hand, opponent_hand):
+def WinLoseDraw(player_hand, opponent_hand):        #Add points for match result
     if player_hand == opponent_hand:
-        return 3       # It's a draw, get 3 points
-    elif player_hand == 1 and opponent_hand == 3:
+        return 3                                    # It's a draw, get 3 points
+    elif player_hand == 1 and opponent_hand == 3:   # Only different case of winning
         return 6
     elif opponent_hand == player_hand - 1:
         return 6
@@ -43,12 +43,9 @@ score = 0
 with open('input.txt', 'r') as input:
     lines = input.readlines()
     for line in lines:
-        print(line[0], line[2])
         p1 = Numberify(line[2])
         op = Numberify(line[0])
         p1 += WinLoseDraw(p1, op)
         score += p1
-        print(score)
         p1 = 0
-
 print(score)

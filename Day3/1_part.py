@@ -33,14 +33,11 @@ def PriNum(letter):
 
 
 
-
 with open ("input.txt", "r") as input:
     pri_sum = 0
     for line in input:
         split_ruck = SplitLine(line.strip())
-        print(split_ruck)
         letter = RepItem(split_ruck)
-        print (letter)
         pri = PriNum(letter)
         pri_sum += pri
-        print(pri_sum)
+    print(pri_sum)

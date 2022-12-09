@@ -1,11 +1,11 @@
 
 """
-Process the file:
+Process the file:                           -> ProcessSection
     split by delimiter (,)
     split by delimiter (-)
     return list with 4 numbers
 
-Compare numbers in list:
+Compare numbers in list:                    -> IsContained
     [0][0]
     [0][1]
     [1][0]
@@ -24,7 +24,7 @@ def ProcessSection(section):
     pair = section.split(',')
     for item in pair:
         ret_list.append(item.split('-'))
-    return ret_list
+    return ret_list            # Returns a 2d list in the end, good enough
 
 def IsContained (IDGroup):
     if int(IDGroup[1][0]) >= int(IDGroup[0][0]) and int(IDGroup[0][1]) >= int(IDGroup[1][1]):

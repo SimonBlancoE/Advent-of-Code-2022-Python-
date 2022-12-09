@@ -1,11 +1,11 @@
 
 """
-Process the file:
+Process the file:                           -> ProcessSection
     split by delimiter (,)
     split by delimiter (-)
     return list with 4 numbers
 
-Compare numbers in list:
+Compare numbers in list:                    -> IsContained
     [0][0]
     [0][1]
     [1][0]
