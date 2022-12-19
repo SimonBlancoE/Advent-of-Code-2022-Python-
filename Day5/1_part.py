@@ -50,6 +50,7 @@ END FUNCTIONS
 instructions = []
 crates = []
 
+# Separate the crates (+ column index) from the instructions
 with open ("input.txt", "r") as input:
     for line in input:
         if line.startswith("move"):
