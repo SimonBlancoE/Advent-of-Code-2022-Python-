@@ -1,4 +1,4 @@
-#Day 6 Part 1
+#Day 6 Part 2
 
 # Check if there are repeated chars in the given chunk
 # If no repeated chars, return False to stop the loop in main
@@ -27,7 +27,6 @@ count = 13
 condition = True
 while condition:
     chunk = datastream[:14]
-    print(chunk)
     condition = CheckChunk(chunk)
     count += 1
     datastream = datastream[1:]
