@@ -13,6 +13,9 @@ dir e
 $ cd e
 $ ls
 584 i
+dir a
+$ cd a
+$ cd ..
 $ cd ..
 $ cd ..
 $ cd d
