@@ -6,14 +6,18 @@ with open('input', 'r') as file:
 data = np.array(data)
 
 
-def tree_is_visible(index, item):
+def plot_tree_lines(index, item):
     trees_north = data[:index[0], index[1]:index[1] + 1]
     trees_east = data[index[0]:index[0] + 1, index[1] + 1:]
     trees_west = data[index[0]:index[0] + 1, index[1] - 1::-1]
     trees_south = data[index[0] + 1:, index[1]: index[1] + 1]
     trees_in_axis = [trees_north, trees_east, trees_west, trees_south]
     trees_in_axis = [np.squeeze(trees) for trees in trees_in_axis]
+    return trees_in_axis
 
+
+def tree_is_visible(index, item):
+    trees_in_axis = plot_tree_lines(index, item)
     for trees in trees_in_axis:
         if np.all(item > trees):
             return True
