@@ -1,56 +1,62 @@
 import numpy as np
 
-with open('simput', 'r') as file:
+with open('input', 'r') as file:
     data = [[int(char) for char in line.rstrip()] for line in file.readlines()]
 
 data = np.array(data)
 
-inner_area = data[1: -1, 1: -1]
-
-# iterate through every tree skipping the outer area
-for index, item in np.ndenumerate(data):
-    print(index, item)
-
-# look north from position (5, 2)
-print("North from 5,2: ", data[:5 + 1, 2:3])
-# look north from (3, 2)
-print("North from 3,2: ", data[:3 + 1, 2:3])
-# look east from position (5, 2)
-print("East from 5,2: ", data[5:, 2:])
-# look west from position (5, 2)
-print("West from 5,2: ", data[5:, :-2])
-# look south from position (1, 3)
-print("south from 1,3: ", data[1:, 3:4])
-# look south from position (5, 2)
-print("south from 5,2: ", data[5:, 2:3])
-
 
 def look_north(index, item):
-    if np.any(item < data[:index[0], index[1]:index[1] + 1]):
+    print("looking north: ", data[:index[0], index[1]:index[1] + 1])
+    if np.any(item <= data[:index[0], index[1]:index[1] + 1]):
         return False
     else:
         return True
 
 
 def look_east(index, item):
-    if np.any(item < data[index[0]:index[0]+1, :index[1]]):
+    print("looking east: ", data[index[0]:index[0] + 1, index[1] + 1:])
+    if np.any(item <= data[index[0]:index[0] + 1, index[1] + 1:]):
         return False
     else:
         return True
 
+
 def look_west(index, item):
-    if not all(item > data[index[0]:, :index[1] * -1]):
+    print("looking west: ", data[index[0]:index[0] + 1, index[1] - 1::-1])
+    if np.any(item <= data[index[0]:index[0] + 1, index[1] - 1::-1]):
         return False
-    return True
+    else:
+        return True
 
 
 def look_south(index, item):
-    if not all(item > data[index[0]:, index[1]: index[1] + 1]):
+    print("looking south: ", data[index[0] + 1:, index[1]: index[1] + 1])
+    if np.any(item <= data[index[0] + 1:, index[1]: index[1] + 1]):
         return False
-    return True
+    else:
+        return True
 
 
-print("Look north: ", look_north((3, 4), 9))
-print("Look east: ", look_east((3, 4), 9))
-print("Look west: ", look_west((3, 4), 9))
-print("Look south: ", look_south((3, 4), 9))
+
+def exclude(index):
+    if index[0] == 0 or index[1] == 0 or index[1] == data.shape[1] - 1 or index[0] == data.shape[0] - 1:
+        return True
+
+
+def count_visible_trees():
+    count = 0
+    for index, item in np.ndenumerate(data):
+        if not exclude(index):
+            print(index, item)
+            if look_north(index, item) or look_south(index, item) or look_east(index, item) or look_west(index, item):
+                count += 1
+                print(f"Tree at position{index} with value {item} was counted")
+        else:
+            count += 1
+            print(f"Tree at position{index} was counted for being at the perimeter")
+    return count
+
+
+print(count_visible_trees())
+
