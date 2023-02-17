@@ -6,6 +6,7 @@ with open('input', 'r') as file:
 data = np.array(data)
 
 
+# Part 1 Functions
 def plot_tree_lines(index, item):
     trees_north = data[:index[0], index[1]:index[1] + 1]
     trees_east = data[index[0]:index[0] + 1, index[1] + 1:]
@@ -40,4 +41,40 @@ def count_visible_trees():
     return count
 
 
+# Part 2 Functions
+def count_trees(tree, tree_line):
+    count = 0
+    tree_line = tree_line.flatten()
+    print("tree height: ", tree)
+    for trees in tree_line:
+        if tree > trees:
+            count += 1
+        else:
+            count += 1
+            break
+    return count
+
+
+def measure_viewing_distance():
+    viewing_distance = 1
+    viewing_distance_arr = []
+    for index, item in np.ndenumerate(data):
+        if not exclude_from_comparison(index):
+            trees_in_axis = plot_tree_lines(index, item)
+            print(trees_in_axis)
+            trees_in_axis[0] = np.flip(trees_in_axis[0])
+            for tree_line in trees_in_axis:
+                count = count_trees(item, tree_line)
+                print("total count: ", count)
+                viewing_distance *= count
+            print("viewing distance: ", viewing_distance)
+            viewing_distance_arr.append(viewing_distance)
+            viewing_distance = 1
+    print(max(viewing_distance_arr))
+
+
+# Part 1
 print(count_visible_trees())
+
+# Part 2
+measure_viewing_distance()
