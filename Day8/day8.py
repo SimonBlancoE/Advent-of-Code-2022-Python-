@@ -45,36 +45,30 @@ def count_visible_trees():
 def count_trees(tree, tree_line):
     count = 0
     tree_line = tree_line.flatten()
-    print("tree height: ", tree)
     for trees in tree_line:
-        if tree > trees:
-            count += 1
-        else:
-            count += 1
+        count += 1
+        if tree <= trees:
             break
     return count
 
 
 def measure_viewing_distance():
     viewing_distance = 1
-    viewing_distance_arr = []
+    viewing_distance_scores = []
     for index, item in np.ndenumerate(data):
         if not exclude_from_comparison(index):
             trees_in_axis = plot_tree_lines(index, item)
-            print(trees_in_axis)
-            trees_in_axis[0] = np.flip(trees_in_axis[0])
+            trees_in_axis[0] = np.flip(trees_in_axis[0])    # Reverse array looking north
             for tree_line in trees_in_axis:
                 count = count_trees(item, tree_line)
-                print("total count: ", count)
                 viewing_distance *= count
-            print("viewing distance: ", viewing_distance)
-            viewing_distance_arr.append(viewing_distance)
+            viewing_distance_scores.append(viewing_distance)
             viewing_distance = 1
-    print(max(viewing_distance_arr))
+    return max(viewing_distance_scores)
 
 
 # Part 1
 print(count_visible_trees())
 
 # Part 2
-measure_viewing_distance()
+print(measure_viewing_distance())
