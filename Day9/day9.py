@@ -1,6 +1,10 @@
 def process_instructions():
-    with open('simput', 'r') as f:
-        data = [(line.strip()[0], line.strip()[-1]) for line in f.readlines()]
+    with open('input', 'r') as f:
+        data = []
+        strip_lines = [line.strip() for line in f.readlines()]
+        for line in strip_lines:
+            direction, moves = line.split()
+            data.append((direction, moves))
         return data
 
 
