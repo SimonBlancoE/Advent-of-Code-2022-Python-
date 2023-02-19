@@ -48,7 +48,27 @@ def move_head():
             head.append((current_x + x, current_y + y))
 
 
-
+def is_touching(head_pos, tail_pos):
+    head_x, head_y = head_pos[0], head_pos[1]
+    tail_x, tail_y = tail_pos[0], tail_pos[1]
+    adjacent_positions = [
+        # Same spot
+        head_pos == tail_pos,
+        # Adjacent in x or y-axis
+        head_x == tail_x + 1 and head_y == tail_y,
+        head_x == tail_x - 1 and head_y == tail_y,
+        head_x == tail_x and head_y == tail_y + 1,
+        head_x == tail_x and head_y == tail_y - 1,
+        # Adjacent in diagonals
+        head_x == tail_x + 1 and head_y == tail_y + 1,
+        head_x == tail_x + 1 and head_y == tail_y - 1,
+        head_x == tail_x - 1 and head_y == tail_y + 1,
+        head_x == tail_x - 1 and head_y == tail_y - 1,
+    ]
+    if any(adjacent_positions):
+        return True
+    else:
+        return False
 
 
 instructions = process_instructions()
@@ -56,9 +76,16 @@ print(instructions)
 
 # Head movement
 head = [(0, 0)]
-tail = np.array([[0, 0]])
+tail = [(0, 0)]
 move_head()
 print(head)
+
+for spot in head:
+    if is_touching(spot, tail[0]):
+        print(f"Head and Tail are touching at {spot} {tail[0]}")
+    else:
+        print(f"Head and Tail are not touching at {spot} {tail[0]}")
+
 
 # Tail movement
 visited_positions = set()

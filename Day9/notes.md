@@ -27,7 +27,7 @@
   - Follow the instruction as a whole step ❌ 
   - Register the movement step by step ✅
 - Tail movement
-  - Check head position
+  - Check head position is touching tail position ✅ 
     - It is in the same row/column
       - Move towards head
     - It is *not* in the same row/column
