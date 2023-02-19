@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def process_instructions():
     with open('simput', 'r') as f:
         data = [(line.strip()[0], line.strip()[-1]) for line in f.readlines()]
@@ -74,18 +71,28 @@ def is_touching(head_pos, tail_pos):
 instructions = process_instructions()
 print(instructions)
 
-# Head movement
 head = [(0, 0)]
 tail = [(0, 0)]
+
+# Head movement
 move_head()
 print(head)
 
-for spot in head:
-    if is_touching(spot, tail[0]):
-        print(f"Head and Tail are touching at {spot} {tail[0]}")
-    else:
-        print(f"Head and Tail are not touching at {spot} {tail[0]}")
-
-
 # Tail movement
-visited_positions = set()
+visited_positions = {(0, 0)}
+
+for current_head_pos in head:
+    current_tail_pos = tail[-1]
+    if is_touching(current_head_pos, current_tail_pos):
+        print(f"Head and Tail are touching at {current_head_pos} {current_tail_pos}")
+    else:
+        print(f"Head and Tail are not touching at {current_head_pos} {current_tail_pos}")
+        tail.append(last_head_pos)
+        print(f"TAIL HAS MOVED TO {last_head_pos}")
+        visited_positions.add(last_head_pos)
+        print(f"visited positions: {visited_positions}" )
+    last_head_pos = current_head_pos
+
+print(len(visited_positions))
+
+

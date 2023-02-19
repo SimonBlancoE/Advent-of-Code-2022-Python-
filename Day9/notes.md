@@ -37,4 +37,5 @@
         - +(1, -1):  South-East
         - +(-1, -1): South-East
       - Move towards head
+    - No matter diagonals, we always have to move tail to the last head position when they were touching
     - Register every visited position
