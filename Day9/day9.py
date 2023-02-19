@@ -14,27 +14,41 @@ def move_x(direction):
         return False
 
 
-def set_moves(direction, moves):
+def negative_direction(direction, moves):
     if direction == 'D' or direction == 'L':
-        return moves * -1
+        return True
     else:
-        return moves
+        return False
 
 
-def determine_head_direction(current_pos, direction, moves):
+def determine_head_nxt_pos(direction, moves):
     if move_x(direction):
-        return current_pos[0] + set_moves(direction, moves), current_pos[1]
-    else:  # move y
-        return current_pos[0], current_pos[1] + set_moves(direction, moves)
+        if negative_direction(direction, moves):
+            for _ in range(int(moves)):
+                yield -1, 0
+        else:
+            for _ in range(int(moves)):
+                yield 1, 0
+    else:
+        if negative_direction(direction, moves):
+            for _ in range(int(moves)):
+                yield 0, -1
+        else:
+            for _ in range(int(moves)):
+                yield 0, 1
 
 
 def move_head():
     for i in instructions:
-        head_current = head[-1]
-        print(head_current)
-        inst_direction, inst_moves = i[0], int(i[1])
-        new = determine_head_direction(head_current, inst_direction, inst_moves)
-        head.append(new)
+        direction = i[0]
+        moves = i[1]
+        for x, y in determine_head_nxt_pos(direction, moves):
+            current_x = head[-1][0]
+            current_y = head[-1][1]
+            head.append((current_x + x, current_y + y))
+
+
+
 
 
 instructions = process_instructions()

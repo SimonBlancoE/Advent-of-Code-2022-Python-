@@ -24,7 +24,8 @@
 
 ## Process movement
 - Head movement ✅
-  - Follow the instruction as a whole step ✅
+  - Follow the instruction as a whole step ❌ 
+  - Register the movement step by step ✅
 - Tail movement
   - Check head position
     - It is in the same row/column
