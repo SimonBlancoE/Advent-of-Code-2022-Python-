@@ -1,5 +1,5 @@
 def process_instructions():
-    with open('input', 'r') as f:
+    with open('simput2', 'r') as f:
         data = []
         strip_lines = [line.strip() for line in f.readlines()]
         for line in strip_lines:
