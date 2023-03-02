@@ -14,7 +14,7 @@ cycle = []
 cycle_check = 20
 x_reg = 1
 sig_str_sum = 0
-for index, row in enumerate(inp):
+for row in inp:
     check_cycle()
     try:
         _, n = row.split()
