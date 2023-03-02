@@ -81,7 +81,6 @@ tail = [(0, 0)]
 # Head movement
 move_head()
 print(head)
-
 # Tail movement
 visited_positions = {(0, 0)}
 
@@ -94,9 +93,7 @@ for current_head_pos in head:
         tail.append(last_head_pos)
         print(f"TAIL HAS MOVED TO {last_head_pos}")
         visited_positions.add(last_head_pos)
-        print(f"visited positions: {visited_positions}" )
+        print(f"visited positions: {visited_positions}")
     last_head_pos = current_head_pos
 
-print(len(visited_positions))
-
-
+print(f"Part 1: {len(visited_positions)}")
