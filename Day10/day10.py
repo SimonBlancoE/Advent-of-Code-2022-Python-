@@ -17,14 +17,12 @@ sig_str_sum = 0
 for index, row in enumerate(inp):
     check_cycle()
     try:
-        op, n = row.split()
+        _, n = row.split()
         for _ in range(2):
             cycle.append(x_reg)
             check_cycle()
         x_reg += int(n)
-    except ValueError:
-        op = 'noop'
-        n = '0'
+    except ValueError:      # noop
         cycle.append(x_reg)
 
 print("Signal strength sum = ", sig_str_sum)
